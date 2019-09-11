@@ -12,7 +12,7 @@ public class Main {
 			}
 
 			System.out.println(getValue(line));
-		}
+		} in.close();
 	}
 
 	public static int getValue(String num) {

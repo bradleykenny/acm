@@ -32,7 +32,7 @@ public class Main {
 			}
 
 			System.out.println(count);
-		}
+		} in.close();
 	}
 
 	public static int numX(String data) {

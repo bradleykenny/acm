@@ -1,28 +1,46 @@
-/* ====================
-UVa Problem #10038
-Bradley Kenny, SID: 45209723
-==================== */
-
 import java.io.*;
 import java.util.*;
 import java.lang.*;
 
 public class Main {
 	public static void main(String args[]) {
-		Scanner in = new Scanner(new InputStreamReader(System.in));
+		Scanner in = new Scanner(System.in);
+		while(in.hasNextLine()) {
+			String[] s = in.nextLine().split("\\s+");
+			int[] seq = new int[s.length - 1];
+			if (seq.length <= 1) {
+				System.out.println("Jolly");
+			} else {
+				for (int i = 0; i < seq.length; i++) {
+					seq[i] = Math.abs(Integer.parseInt(s[i]) - Integer.parseInt(s[i+1]));
+					System.out.print(seq[i] + " ");
+				}
+				
+				HashMap<Integer, Boolean> temp = new HashMap<>();
+				for (int i = 1; i < s.length; i++) {
+					temp.put(i, false);
+				}
 
-		String nums = in.nextLine();
-		String[] nums_split = nums.split("\\s");
-		int[] nums_arr = new int[nums_split.length];
+				for (int i : seq) {
+					if (temp.containsKey(i)) {
+						temp.replace(i, true);
+					}
+				}
 
-		for (int i = 0; i < nums_arr.length; i++) {
-			nums_arr[i] = Integer.parseInt(nums_split[i]);
+				boolean jolly = true;
+				for (int i : temp.keySet()) {
+					if (!temp.get(i)) {
+						jolly = false;
+					}
+				}
+
+				if (jolly) {
+					System.out.println("Jolly");
+				} else {
+					System.out.println("Not jolly");
+				}
+			}
 		}
-
-		int[] diff = new int[nums_arr.length - 1];
-		for (int i = 0; i < nums_arr.length - 1; i++) {
-			diff[i] = nums_arr[i] - nums_arr[i+1];
-			System.out.print(diff[i] + ", ");
-		}
-	}
+		in.close();
+	} 
 }
